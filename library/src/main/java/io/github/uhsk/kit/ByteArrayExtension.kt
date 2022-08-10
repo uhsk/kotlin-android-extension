@@ -15,11 +15,11 @@
  *
  */
 
-package io.github.uhsk.android.extensions
+package io.github.uhsk.kit
 
-import io.github.uhsk.android.extensions.utils.ByteArrayBase64Util
-import io.github.uhsk.android.extensions.utils.ByteArrayGzipUtil
-import io.github.uhsk.android.extensions.utils.ByteArrayHashUtil
+import io.github.uhsk.kit.utils.ByteArrayBase64Util
+import io.github.uhsk.kit.utils.ByteArrayGzipUtil
+import io.github.uhsk.kit.utils.ByteArrayHashUtil
 import org.apache.commons.codec.binary.Hex
 
 /**

@@ -15,7 +15,7 @@
  *
  */
 
-package io.github.uhsk.android.extensions.utils
+package io.github.uhsk.kit.utils
 
 import android.util.Base64
 import androidx.annotation.IntDef

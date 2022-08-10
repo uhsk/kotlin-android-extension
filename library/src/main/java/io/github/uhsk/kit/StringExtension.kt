@@ -15,9 +15,9 @@
  *
  */
 
-package io.github.uhsk.android.extensions
+package io.github.uhsk.kit
 
-import io.github.uhsk.android.extensions.utils.ByteArrayBase64Util
+import io.github.uhsk.kit.utils.ByteArrayBase64Util
 import org.apache.commons.codec.binary.Hex
 import java.io.File
 import java.nio.charset.Charset

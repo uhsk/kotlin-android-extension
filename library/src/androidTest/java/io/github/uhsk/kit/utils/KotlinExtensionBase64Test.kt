@@ -15,12 +15,11 @@
  *
  */
 
-package io.github.uhsk.android.extensions.utils
+package io.github.uhsk.kit.utils
 
 import android.util.Base64
-import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import io.github.uhsk.android.extensions.base64
+import io.github.uhsk.kit.base64
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

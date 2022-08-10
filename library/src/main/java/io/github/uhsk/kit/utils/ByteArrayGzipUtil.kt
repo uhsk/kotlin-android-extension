@@ -15,7 +15,7 @@
  *
  */
 
-package io.github.uhsk.android.extensions.utils
+package io.github.uhsk.kit.utils
 
 import org.apache.commons.io.output.ByteArrayOutputStream
 import java.io.ByteArrayInputStream

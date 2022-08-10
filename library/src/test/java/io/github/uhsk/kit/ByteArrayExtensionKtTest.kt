@@ -15,7 +15,7 @@
  *
  */
 
-package io.github.uhsk.android.extensions
+package io.github.uhsk.kit
 
 import org.junit.Assert
 import org.junit.Test

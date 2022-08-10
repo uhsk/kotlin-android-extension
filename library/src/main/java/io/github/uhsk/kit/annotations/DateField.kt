@@ -15,7 +15,7 @@
  *
  */
 
-package io.github.uhsk.android.extensions.annotations
+package io.github.uhsk.kit.annotations
 
 import androidx.annotation.IntDef
 import java.util.*

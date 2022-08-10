@@ -15,7 +15,7 @@
  *
  */
 
-package io.github.uhsk.android.extensions
+package io.github.uhsk.kit
 
 import org.apache.commons.io.FileUtils
 

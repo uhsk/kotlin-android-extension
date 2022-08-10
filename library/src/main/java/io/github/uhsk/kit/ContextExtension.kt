@@ -15,7 +15,7 @@
  *
  */
 
-package io.github.uhsk.android.extensions
+package io.github.uhsk.kit
 
 import android.content.ClipboardManager
 import android.content.Context

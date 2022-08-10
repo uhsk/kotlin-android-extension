@@ -15,9 +15,9 @@
  *
  */
 
-package io.github.uhsk.android.extensions
+package io.github.uhsk.kit
 
-import io.github.uhsk.android.extensions.annotations.DateField
+import io.github.uhsk.kit.annotations.DateField
 import java.text.SimpleDateFormat
 import java.util.*
 
