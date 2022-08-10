@@ -50,6 +50,7 @@ dependencies {
     implementation libs.androidx.appcompat
     implementation libs.common.io
     implementation libs.common.codec
+    implementation libs.common.lang
     testImplementation libs.test.junit
     androidTestImplementation libs.test.android.ext
     androidTestImplementation libs.test.android.espresso

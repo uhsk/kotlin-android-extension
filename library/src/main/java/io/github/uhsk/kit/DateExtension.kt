@@ -72,3 +72,19 @@ fun Date.toCalendar(): Calendar {
     calendar.timeInMillis = this.time
     return calendar
 }
+
+/**
+ * @since 1.0.2
+ * @author sollyu
+ */
+fun Date.toSqlTime(): java.sql.Time {
+    return java.sql.Time(this.time)
+}
+
+/**
+ * @since 1.0.2
+ * @author sollyu
+ */
+fun Date.toSqlDate(): java.sql.Date {
+    return java.sql.Date(this.time)
+}

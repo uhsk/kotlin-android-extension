@@ -19,6 +19,7 @@ package io.github.uhsk.kit
 
 import io.github.uhsk.kit.utils.ByteArrayBase64Util
 import org.apache.commons.codec.binary.Hex
+import org.apache.commons.lang3.StringUtils
 import java.io.File
 import java.nio.charset.Charset
 
@@ -61,5 +62,33 @@ fun CharSequence.asFile(): File = File(this.toString())
 /**
  * @since 1.0.0
  * @author sollyu
+ * @see Hex.decodeHex
  */
 fun CharSequence.asHexStringToByteArray(): ByteArray = Hex.decodeHex(this.toString())
+
+/**
+ * @since 1.0.2
+ * @author sollyu
+ * @see org.apache.commons.lang3.StringUtils.abbreviate
+ */
+fun CharSequence.abbreviate(width: Int): CharSequence = this.toString().abbreviate(width)
+
+/**
+ * @since 1.0.2
+ * @author sollyu
+ * @see StringUtils.center
+ */
+fun CharSequence.center(size: Int, pad: String = " "): CharSequence = this.toString().center(size, pad)
+
+/**
+ * @since 1.0.2
+ * @author sollyu
+ * @see StringUtils.chomp
+ */
+fun CharSequence.chomp(): CharSequence = this.toString().chomp()
+
+/**
+ * @since 1.0.2
+ * @author sollyu
+ */
+fun CharSequence.find(regex: Regex, startIndex: Int = 0) = regex.find(this, startIndex)
