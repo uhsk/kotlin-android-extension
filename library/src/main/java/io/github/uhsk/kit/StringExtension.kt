@@ -18,6 +18,8 @@
 package io.github.uhsk.kit
 
 import io.github.uhsk.kit.utils.ByteArrayBase64Util
+import io.github.uhsk.kit.utils.ByteArrayGzipUtil
+import io.github.uhsk.kit.utils.ByteArrayHashUtil
 import org.apache.commons.codec.binary.Hex
 import java.io.File
 import java.nio.charset.Charset
@@ -51,6 +53,18 @@ fun String.sha512(charset: Charset = Charsets.UTF_8, toLowerCase: Boolean = fals
  * @author sollyu
  */
 fun String.base64(charset: Charset = Charsets.UTF_8): ByteArrayBase64Util = ByteArrayBase64Util(bytes = this.toByteArray(charset))
+
+/**
+ * @since 1.0.2
+ * @author sollyu
+ */
+fun String.hash(charset: Charset = Charsets.UTF_8): ByteArrayHashUtil = this.toByteArray(charset).hash()
+
+/**
+ * @since 1.0.2
+ * @author sollyu
+ */
+fun String.gzip(charset: Charset = Charsets.UTF_8): ByteArrayGzipUtil = this.toByteArray(charset).gzip()
 
 /**
  * @since 1.0.0
