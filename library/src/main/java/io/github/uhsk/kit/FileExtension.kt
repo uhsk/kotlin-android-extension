@@ -18,9 +18,17 @@
 package io.github.uhsk.kit
 
 import org.apache.commons.io.FileUtils
+import org.apache.commons.io.FilenameUtils
 
 import java.io.File
 import java.io.FileFilter
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FileUtils.checksumCRC32
+ */
+fun File.crc32(): Long = FileUtils.checksumCRC32(this)
 
 /**
  * @since 1.0.0
@@ -141,3 +149,164 @@ fun File.asDirectoryMoveTo(destDir: File) = FileUtils.moveDirectory(this, destDi
  * @author sollyu
  */
 fun File.asDirectoryMoveToDirectory(destDir: File, createDestDir: Boolean = false) = FileUtils.moveDirectoryToDirectory(this, destDir, createDestDir)
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+operator fun File.iterator(): Iterator<File> {
+    return iterator(extensions = emptyArray(), recursive = false)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FileUtils.iterateFiles
+ */
+fun File.iterator(extensions: Array<String>?, recursive: Boolean = false): Iterator<File> {
+    return FileUtils.iterateFiles(this, extensions, recursive)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FileUtils.contentEquals
+ */
+fun File.contentEquals(file: File): Boolean {
+    return FileUtils.contentEquals(this, file)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FileUtils.contentEquals
+ */
+fun File.lengthToDisplaySize(): CharSequence {
+    return FileUtils.byteCountToDisplaySize(this.length())
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FileUtils.forceDelete
+ */
+fun File.forceDelete() {
+    return FileUtils.forceDelete(this)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FileUtils.forceDeleteOnExit
+ */
+fun File.forceDeleteOnJvmExit() {
+    return FileUtils.forceDeleteOnExit(this)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.normalize
+ */
+fun File.nameNormalize(): String {
+    return FilenameUtils.normalize(this.path)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.normalizeNoEndSeparator
+ */
+fun File.nameNormalizeNoEndSeparator(): String {
+    return FilenameUtils.normalizeNoEndSeparator(this.path)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.concat
+ */
+fun File.join(vararg paths: String): File {
+    var basePath = this.path
+    paths.forEach { basePath = FilenameUtils.concat(basePath, it) }
+    return File(basePath)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.concat
+ */
+fun File.pathJoin(vararg paths: String): File = join(*paths)
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.separatorsToUnix
+ */
+fun File.pathSeparatorsToUnix(): String {
+    return FilenameUtils.separatorsToUnix(this.path)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.separatorsToWindows
+ */
+fun File.pathSeparatorsToWindows(): String {
+    return FilenameUtils.separatorsToWindows(this.path)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.separatorsToSystem
+ */
+fun File.pathSeparatorsToSystem(): String {
+    return FilenameUtils.separatorsToSystem(this.path)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.getPathNoEndSeparator
+ */
+fun File.pathNoEndSeparator(): String {
+    return FilenameUtils.getPathNoEndSeparator(this.path)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.removeExtension
+ */
+fun File.pathRemoveExtension(): String {
+    return FilenameUtils.removeExtension(this.path)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.wildcardMatch
+ */
+fun File.pathWildcardMatch(wildcardMatcher: String): Boolean {
+    return FilenameUtils.wildcardMatch(this.path, wildcardMatcher)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.isExtension
+ */
+fun File.isExtension(extension: String): Boolean {
+    return FilenameUtils.isExtension(this.path, extension)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.isExtension
+ */
+fun File.isExtension(vararg extension: String): Boolean {
+    return FilenameUtils.isExtension(this.path, extension)
+}
