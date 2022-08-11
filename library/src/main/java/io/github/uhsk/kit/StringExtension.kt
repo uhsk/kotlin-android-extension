@@ -25,6 +25,7 @@ import org.apache.commons.lang3.LocaleUtils
 import org.apache.commons.lang3.StringUtils
 import java.io.File
 import java.nio.charset.Charset
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -79,12 +80,6 @@ fun String.gzip(charset: Charset = Charsets.UTF_8): ByteArrayGzipUtil = this.toB
  * @since 1.0.0
  * @author sollyu
  */
-fun String.asFile(): File = File(this)
-
-/**
- * @since 1.0.0
- * @author sollyu
- */
 fun String.asHexStringToByteArray(): ByteArray = Hex.decodeHex(this)
 
 /**
@@ -115,8 +110,21 @@ fun String.chomp(): String = StringUtils.chomp(this)
 fun String.find(regex: Regex, startIndex: Int = 0) = regex.find(this, startIndex)
 
 /**
+ * @since 1.0.0
+ * @author sollyu
+ */
+fun String.toFile(): File = File(this)
+
+/**
  * @since 1.0.2
  * @author sollyu
  * @see LocaleUtils.toLocale
  */
-fun String.asLocale(): Locale = LocaleUtils.toLocale(this)
+fun String.toLocale(): Locale = LocaleUtils.toLocale(this)
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see LocaleUtils.toLocale
+ */
+fun String.toDate(pattern: String = "yyyy-MM-dd HH:mm:ss", locale: Locale = Locale.ENGLISH): Date? = SimpleDateFormat(pattern, locale).parse(this)
