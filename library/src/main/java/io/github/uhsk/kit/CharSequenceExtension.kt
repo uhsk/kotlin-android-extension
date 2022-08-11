@@ -27,6 +27,12 @@ import java.nio.charset.Charset
  * @since 1.0.0
  * @author sollyu
  */
+fun CharSequence.uuid(charset: Charset = Charsets.UTF_8): CharSequence = this.toString().toByteArray(charset).hash().uuid().toString()
+
+/**
+ * @since 1.0.0
+ * @author sollyu
+ */
 fun CharSequence.md5(charset: Charset = Charsets.UTF_8, toLowerCase: Boolean = false): CharSequence = this.toString().toByteArray(charset).hash().md5().toHexString(toLowerCase)
 
 /**

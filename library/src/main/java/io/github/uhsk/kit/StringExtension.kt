@@ -28,6 +28,12 @@ import java.nio.charset.Charset
 import java.util.*
 
 /**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun String.uuid(charset: Charset = Charsets.UTF_8): CharSequence = this.toByteArray(charset).hash().uuid().toString()
+
+/**
  * @since 1.0.0
  * @author sollyu
  */

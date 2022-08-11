@@ -18,12 +18,19 @@
 package io.github.uhsk.kit.utils
 
 import org.apache.commons.codec.digest.DigestUtils
+import java.util.*
 
 /**
  * @author sollyu
  * @date   2022-08-10
  */
 class ByteArrayHashUtil(private val bytes: ByteArray) {
+
+    /**
+     * @since 1.0.3
+     * @author sollyu
+     */
+    fun uuid(): UUID = UUID.nameUUIDFromBytes(bytes)
 
     /**
      * @since 1.0.0
