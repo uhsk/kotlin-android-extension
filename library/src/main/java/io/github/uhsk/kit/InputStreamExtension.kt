@@ -38,6 +38,8 @@ fun InputStream.md5(): ByteArray = DigestUtils.md5(this)
  * @since 1.0.0
  * @author sollyu
  */
+@Suppress(names = ["DEPRECATION"])
+@Deprecated(message = "", replaceWith = ReplaceWith(expression = "sha1()"))
 fun InputStream.sha(): ByteArray = DigestUtils.sha(this)
 
 /**
