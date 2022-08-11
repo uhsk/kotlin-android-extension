@@ -2,7 +2,7 @@
 
 ## 说明
 
-安卓开发中常用的轮子，全部都是Kotlin的(拓展函数)[https://kotlinlang.org/docs/extensions.html], 比如常见的有
+安卓开发中常用的轮子，全部都是Kotlin的[拓展函数](https://kotlinlang.org/docs/extensions.html), 比如常见的有下面的API，但是却<font color=red>远远不止</font>这些。
 
 ```kotlin
 val md5 = "test".md5()
@@ -25,6 +25,17 @@ allprojects {
 ```groovy
 dependencies {
     implementation 'com.github.uhsk:kotlin-android-extension:latest'
+}
+```
+
+## Q&A
+
+如遇到您项目中使用的kotlin版本和当前项目的kotlin版本不一致导致的冲突，可使用：
+```groovy
+dependencies {
+    implementation ('com.github.uhsk:kotlin-android-extension:latest') {
+        exclude group: 'org.jetbrains.kotlin'   // 过滤此项目使用的kotlin版本，使用您项目的kotlin版本
+    }
 }
 ```
 
