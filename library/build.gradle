@@ -23,7 +23,7 @@ android {
 
     defaultConfig {
         minSdk libs.versions.minSdk.get().toInteger()
-        targetSdk libs.versions.compileSdk.get().toInteger()
+        targetSdk libs.versions.minSdk.get().toInteger()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -41,14 +41,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-        freeCompilerArgs = ["-Xcontext-receivers", "-Xbackend-threads=0"]
+        freeCompilerArgs = ["-Xbackend-threads=0"]
     }
 }
 
 dependencies {
-    implementation libs.kotlin.coroutines
-    implementation libs.androidx.core
-    implementation libs.androidx.appcompat
+    compileOnly libs.androidx.core
+    compileOnly libs.androidx.appcompat
     implementation libs.common.io
     implementation libs.common.codec
     implementation libs.common.lang

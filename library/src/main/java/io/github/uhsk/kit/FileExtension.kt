@@ -46,6 +46,8 @@ fun File.md5(): ByteArray = this.inputStream().md5()
  * @since 1.0.0
  * @author sollyu
  */
+@Suppress(names = ["DEPRECATION"])
+@Deprecated(message = "", replaceWith = ReplaceWith(expression = "sha1()"))
 fun File.sha(): ByteArray = this.inputStream().sha()
 
 /**

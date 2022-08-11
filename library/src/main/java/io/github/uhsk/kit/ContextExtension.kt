@@ -25,8 +25,6 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 @Suppress(names = ["FunctionName"])
 private fun Intent.__contextStartActivityDefaultFlag(block: (Intent.() -> Unit)?) {
@@ -137,22 +135,6 @@ fun Context.showToast(text: CharSequence, duration: Int = Toast.LENGTH_LONG) {
 @MainThread
 fun Context.showToast(@StringRes resId: Int, duration: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, resId, duration).show()
-}
-
-/**
- * @since 1.0.1
- * @author sollyu
- */
-suspend fun Context.showToastBySuspend(text: CharSequence, duration: Int = Toast.LENGTH_LONG) = withContext(context = Dispatchers.Main) {
-    showToast(text, duration)
-}
-
-/**
- * @since 1.0.1
- * @author sollyu
- */
-suspend fun Context.showToastBySuspend(@StringRes resId: Int, duration: Int = Toast.LENGTH_LONG) = withContext(context = Dispatchers.Main) {
-    showToast(resId, duration)
 }
 
 /**

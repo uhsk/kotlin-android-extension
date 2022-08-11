@@ -23,21 +23,7 @@ import android.content.Context
  * @since 1.0.3
  * @author sollyu
  */
-context(Context)
-fun Int.dp(): Int = this@Context.dp2px(dp = this)
-
-/**
- * @since 1.0.3
- * @author sollyu
- */
 fun Int.dp(context: Context) = context.dp2px(dp = this)
-
-/**
- * @since 1.0.3
- * @author sollyu
- */
-context(Context)
-fun Int.sp(): Int = this@Context.sp2px(sp = this)
 
 /**
  * @since 1.0.3
