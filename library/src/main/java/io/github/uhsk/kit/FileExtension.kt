@@ -310,10 +310,3 @@ fun File.isExtension(extension: String): Boolean {
 fun File.isExtension(vararg extension: String): Boolean {
     return FilenameUtils.isExtension(this.path, extension)
 }
-
-
-
-fun File.test() {
-    val f = File("")
-    f.path
-}
