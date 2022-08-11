@@ -37,6 +37,10 @@ private fun Intent.__contextStartActivityDefaultFlag(block: (Intent.() -> Unit)?
     }
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.startActivityForPackageNameByDefaultIntent(packageName: String, block: (Intent.() -> Unit)? = null) {
     val intent: Intent = this.packageManager.getLaunchIntentForPackage(packageName) ?: throw NullPointerException()
@@ -44,6 +48,10 @@ fun Context.startActivityForPackageNameByDefaultIntent(packageName: String, bloc
     this.startActivity(intent)
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.startActivityForSystemSettingsByApplicationDetails(packageName: String, block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -52,6 +60,10 @@ fun Context.startActivityForSystemSettingsByApplicationDetails(packageName: Stri
     this.startActivity(intent)
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.startActivityForSystemSettingsByAccessibility(block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
@@ -59,6 +71,10 @@ fun Context.startActivityForSystemSettingsByAccessibility(block: (Intent.() -> U
     this.startActivity(intent)
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.startActivityForLauncherHome(block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Intent.ACTION_MAIN)
@@ -66,11 +82,19 @@ fun Context.startActivityForLauncherHome(block: (Intent.() -> Unit)? = null) {
     this.startActivity(intent)
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.startActivityForUrlByDefaultBrowser(url: String, block: (Intent.() -> Unit)? = null) {
     startActivityForUrlByDefaultBrowser(Uri.parse(url), block)
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.startActivityForUrlByDefaultBrowser(uri: Uri, block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -78,6 +102,10 @@ fun Context.startActivityForUrlByDefaultBrowser(uri: Uri, block: (Intent.() -> U
     this.startActivity(intent)
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.showDialogForUninstallApplication(packageName: String, block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Intent.ACTION_DELETE, Uri.fromParts("package", packageName, null))
@@ -85,24 +113,90 @@ fun Context.showDialogForUninstallApplication(packageName: String, block: (Inten
     this.startActivity(intent)
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 fun Context.getSystemServiceForClipboardManager(): ClipboardManager {
     return this.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.showToast(text: CharSequence, duration: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, text, duration).show()
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 @MainThread
 fun Context.showToast(@StringRes resId: Int, duration: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, resId, duration).show()
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 suspend fun Context.showToastBySuspend(text: CharSequence, duration: Int = Toast.LENGTH_LONG) = withContext(context = Dispatchers.Main) {
     showToast(text, duration)
 }
 
+/**
+ * @since 1.0.1
+ * @author sollyu
+ */
 suspend fun Context.showToastBySuspend(@StringRes resId: Int, duration: Int = Toast.LENGTH_LONG) = withContext(context = Dispatchers.Main) {
     showToast(resId, duration)
 }
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Context.dp2px(dp: Int): Int {
+    return (density * dp + 0.5).toInt()
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Context.sp2px(sp: Int): Int {
+    return (fontDensity * sp + 0.5).toInt()
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Context.px2dp(px: Int): Int {
+    return (px / density + 0.5).toInt()
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Context.px2sp(px: Int): Int {
+    return (px / fontDensity + 0.5).toInt()
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+val Context.density: Float
+    get() = this.resources.displayMetrics.density
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+val Context.fontDensity: Float
+    get() = this.resources.displayMetrics.scaledDensity
