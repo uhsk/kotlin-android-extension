@@ -18,6 +18,7 @@
 package io.github.uhsk.kit
 
 import io.github.uhsk.kit.annotations.DateField
+import org.apache.commons.lang3.time.DateUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -64,13 +65,27 @@ fun Date.minus(amount: Int, @DateField field: Int): Date {
 }
 
 /**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Date.add(amount: Int, @DateField field: Int = Calendar.DAY_OF_MONTH): Date {
+    return plus(amount, field)
+}
+
+/**
  * @since 1.0.0
  * @author sollyu
  */
 fun Date.toCalendar(): Calendar {
-    val calendar = Calendar.getInstance()
-    calendar.timeInMillis = this.time
-    return calendar
+    return DateUtils.toCalendar(this)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Date.toCalendar(timeZone: TimeZone): Calendar {
+    return DateUtils.toCalendar(this, timeZone)
 }
 
 /**
@@ -103,3 +118,21 @@ fun Date.toSqlTimestamp(): java.sql.Timestamp {
  */
 val Date.timestamp: Long
     get() = this.time
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Date.isToday(): Boolean = android.text.format.DateUtils.isToday(this.time)
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Date.isSameDay(time: Long) = DateUtils.isSameDay(this, time.toDate())
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Date.isSameDay(date: Date) = DateUtils.isSameDay(this, date)
