@@ -88,3 +88,18 @@ fun Date.toSqlTime(): java.sql.Time {
 fun Date.toSqlDate(): java.sql.Date {
     return java.sql.Date(this.time)
 }
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+fun Date.toSqlTimestamp(): java.sql.Timestamp {
+    return java.sql.Timestamp(this.time)
+}
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ */
+val Date.timestamp: Long
+    get() = this.time
