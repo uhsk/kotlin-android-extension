@@ -43,6 +43,9 @@ android {
         jvmTarget = '1.8'
         freeCompilerArgs = ["-Xbackend-threads=0"]
     }
+    packagingOptions {
+        exclude 'META-INF/library_release.kotlin_module'
+    }
 }
 
 dependencies {
