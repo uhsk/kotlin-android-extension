@@ -183,9 +183,8 @@ fun File.contentEquals(file: File): Boolean {
  * @author sollyu
  * @see FileUtils.contentEquals
  */
-fun File.lengthToDisplaySize(): CharSequence {
-    return FileUtils.byteCountToDisplaySize(this.length())
-}
+val File.lengthToDisplaySize: String
+    get() = FileUtils.byteCountToDisplaySize(this.length())
 
 /**
  * @since 1.0.3
@@ -210,18 +209,16 @@ fun File.forceDeleteOnJvmExit() {
  * @author sollyu
  * @see FilenameUtils.normalize
  */
-fun File.nameNormalize(): String {
-    return FilenameUtils.normalize(this.path)
-}
+val File.pathNormalize: String
+    get() = FilenameUtils.normalize(this.path)
 
 /**
  * @since 1.0.3
  * @author sollyu
  * @see FilenameUtils.normalizeNoEndSeparator
  */
-fun File.nameNormalizeNoEndSeparator(): String {
-    return FilenameUtils.normalizeNoEndSeparator(this.path)
-}
+val File.nameNormalizeNoEndSeparator: String
+    get() = FilenameUtils.normalizeNoEndSeparator(this.path)
 
 /**
  * @since 1.0.3
@@ -246,45 +243,40 @@ fun File.pathJoin(vararg paths: String): File = join(*paths)
  * @author sollyu
  * @see FilenameUtils.separatorsToUnix
  */
-fun File.pathSeparatorsToUnix(): String {
-    return FilenameUtils.separatorsToUnix(this.path)
-}
+val File.pathSeparatorsToUnix: String
+    get() = FilenameUtils.separatorsToUnix(this.path)
 
 /**
  * @since 1.0.3
  * @author sollyu
  * @see FilenameUtils.separatorsToWindows
  */
-fun File.pathSeparatorsToWindows(): String {
-    return FilenameUtils.separatorsToWindows(this.path)
-}
+val File.pathSeparatorsToWindows: String
+    get() = FilenameUtils.separatorsToWindows(this.path)
 
 /**
  * @since 1.0.3
  * @author sollyu
  * @see FilenameUtils.separatorsToSystem
  */
-fun File.pathSeparatorsToSystem(): String {
-    return FilenameUtils.separatorsToSystem(this.path)
-}
+val File.pathSeparatorsToSystem: String
+    get() = FilenameUtils.separatorsToSystem(this.path)
 
 /**
  * @since 1.0.3
  * @author sollyu
  * @see FilenameUtils.getPathNoEndSeparator
  */
-fun File.pathNoEndSeparator(): String {
-    return FilenameUtils.getPathNoEndSeparator(this.path)
-}
+val File.pathNoEndSeparator: String
+    get() = FilenameUtils.getPathNoEndSeparator(this.path)
 
 /**
  * @since 1.0.3
  * @author sollyu
  * @see FilenameUtils.removeExtension
  */
-fun File.pathRemoveExtension(): String {
-    return FilenameUtils.removeExtension(this.path)
-}
+val File.pathRemoveExtension: String
+    get() = FilenameUtils.removeExtension(this.path)
 
 /**
  * @since 1.0.3
@@ -294,6 +286,22 @@ fun File.pathRemoveExtension(): String {
 fun File.pathWildcardMatch(wildcardMatcher: String): Boolean {
     return FilenameUtils.wildcardMatch(this.path, wildcardMatcher)
 }
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.getFullPath
+ */
+val File.pathDirectory: String
+    get() = FilenameUtils.getFullPath(this.path)
+
+/**
+ * @since 1.0.3
+ * @author sollyu
+ * @see FilenameUtils.getFullPathNoEndSeparator
+ */
+val File.pathDirectoryNoEndSeparator: String
+    get() = FilenameUtils.getFullPathNoEndSeparator(this.path)
 
 /**
  * @since 1.0.3
