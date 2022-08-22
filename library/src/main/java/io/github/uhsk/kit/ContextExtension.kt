@@ -36,10 +36,17 @@ private fun Intent.__contextStartActivityDefaultFlag(block: (Intent.() -> Unit)?
 }
 
 /**
+ * 根据包名打开一个程序
+ *
+ * @param packageName 软件包名
+ * @param block [Intent]自定义回调
+ *
  * @since 1.0.1
  * @author sollyu
+ * @throws NullPointerException 获取intent失败时
  */
 @MainThread
+@Throws(exceptionClasses = [NullPointerException::class])
 fun Context.startActivityForPackageNameByDefaultIntent(packageName: String, block: (Intent.() -> Unit)? = null) {
     val intent: Intent = this.packageManager.getLaunchIntentForPackage(packageName) ?: throw NullPointerException()
     intent.__contextStartActivityDefaultFlag(block)
@@ -47,6 +54,11 @@ fun Context.startActivityForPackageNameByDefaultIntent(packageName: String, bloc
 }
 
 /**
+ * 跳转到已安装app的详细页面
+ *
+ * @param packageName 软件包名
+ * @param block [Intent]自定义回调
+ *
  * @since 1.0.1
  * @author sollyu
  */
@@ -59,6 +71,8 @@ fun Context.startActivityForSystemSettingsByApplicationDetails(packageName: Stri
 }
 
 /**
+ * 跳转到手机设置的无障碍页面
+ *
  * @since 1.0.1
  * @author sollyu
  */
