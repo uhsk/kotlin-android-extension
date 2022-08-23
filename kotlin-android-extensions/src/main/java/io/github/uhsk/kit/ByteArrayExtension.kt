@@ -15,6 +15,8 @@
  *
  */
 
+@file:JvmName(name = "ByteArrayExtension")
+
 package io.github.uhsk.kit
 
 import io.github.uhsk.kit.utils.ByteArrayBase64Util
