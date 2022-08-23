@@ -27,16 +27,16 @@ class MapExtensionKtTest {
     fun getOrDefault() {
         val hashMap: HashMap<String, String?> = HashMap()
         hashMap["test1"] = null
-        Assert.assertEquals(null, hashMap.getOrDefault(key = "test1", default = ""))
-        Assert.assertEquals(null, hashMap.getOrDefault(key = "test2", default = null))
-        Assert.assertEquals("", hashMap.getOrDefault(key = "test2", default = ""))
+        Assert.assertEquals(null, hashMap.getValueIfNotExist(key = "test1", default = ""))
+        Assert.assertEquals(null, hashMap.getValueIfNotExist(key = "test2", default = null))
+        Assert.assertEquals("", hashMap.getValueIfNotExist(key = "test2", default = ""))
     }
 
     @Test
-    fun getOrDefaultNotNull() {
+    fun getValueIfNull() {
         val hashMap: HashMap<String, String?> = HashMap()
         hashMap["test1"] = null
-        Assert.assertEquals("", hashMap.getOrDefaultNotNull(key = "test1", default = ""))
+        Assert.assertEquals("", hashMap.getValueIfNull(key = "test1", default = ""))
     }
 
     @Test
@@ -54,5 +54,48 @@ class MapExtensionKtTest {
 
         val test3Value: String = hashMap.getValueAs(key = "test3")
         Assert.assertEquals("", test3Value)
+    }
+
+    @Test
+    fun getValueIfEmpty() {
+        val hashMap: HashMap<String, CharSequence?> = HashMap()
+        hashMap["test1"] = null
+        hashMap["test2"] = ""
+        hashMap["test3"] = " "
+        hashMap["test4"] = "1"
+
+        Assert.assertEquals("hello", hashMap.getValueIfEmpty(key = "test0", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfEmpty(key = "test1", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfEmpty(key = "test2", default = "hello"))
+        Assert.assertEquals(" ", hashMap.getValueIfEmpty(key = "test3", default = "hello"))
+        Assert.assertEquals("1", hashMap.getValueIfEmpty(key = "test4", default = "hello"))
+    }
+
+    @Test
+    fun getValueIfBlank() {
+        val hashMap: HashMap<String, CharSequence?> = HashMap()
+        hashMap["test1"] = null
+        hashMap["test2"] = ""
+        hashMap["test3"] = " "
+        hashMap["test4"] = "1"
+
+        Assert.assertEquals("hello", hashMap.getValueIfBlank(key = "test0", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfBlank(key = "test1", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfBlank(key = "test2", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfBlank(key = "test3", default = "hello"))
+        Assert.assertEquals("1", hashMap.getValueIfBlank(key = "test4", default = "hello"))
+    }
+
+    @Test
+    fun getValueIfPredicate() {
+        val hashMap: HashMap<String, CharSequence?> = HashMap()
+        hashMap["test1"] = null
+        hashMap["test2"] = ""
+        hashMap["test3"] = " "
+
+        Assert.assertEquals("hello", hashMap.getValueIfPredicate(key = "test0", default = "hello") { it?.isEmpty() == true })
+        Assert.assertEquals("hello", hashMap.getValueIfPredicate(key = "test1", default = "hello") { it?.isEmpty() == true })
+        Assert.assertEquals("hello", hashMap.getValueIfPredicate(key = "test2", default = "hello") { it?.isBlank() == true })
+        Assert.assertEquals("hello", hashMap.getValueIfPredicate(key = "test3", default = "hello") { it?.isBlank() == true })
     }
 }

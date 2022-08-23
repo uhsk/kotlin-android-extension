@@ -17,13 +17,15 @@
 
 package io.github.uhsk.kit
 
+import org.jetbrains.annotations.NotNull
+
 /**
  * 或者一个值：值的内容允许为[null]
  *
- * @since 1.0.3
+ * @since 1.0.6
  * @author sollyu
  */
-inline fun <reified K, V> Map<out K, V>.getOrDefault(key: K, default: V): V? {
+inline fun <reified K, V> Map<out K, V>.getValueIfNotExist(key: K, default: V): V? {
     if (this.containsKey(key).not())
         return default
     return this[key]
@@ -33,13 +35,51 @@ inline fun <reified K, V> Map<out K, V>.getOrDefault(key: K, default: V): V? {
 /**
  * 获取一个值，如果值不存在或者为null则返回默认值
  *
- * @since 1.0.3
+ * @since 1.0.6
  * @author sollyu
  */
-inline fun <reified K, V> Map<out K, V>.getOrDefaultNotNull(key: K, default: V): V {
-    return getOrDefault(key, default) ?: default
+inline fun <reified K, V> Map<out K, V>.getValueIfNull(key: K, default: V): V {
+    return getValueIfNotExist(key, default) ?: default
 }
 
+/**
+ * 获取一个值(字符串限定)，如果值的内容为空（包括null）返回默认值
+ *
+ * @since 1.0.7
+ * @author sollyu
+ */
+inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfEmpty(key: K, default: V): V {
+    val value = getValueIfNull(key, default)
+    return if (value == null || value.isEmpty()) default else value
+}
+
+/**
+ * 获取一个值(字符串限定)，如果值的内容为空（包括null）返回默认值
+ *
+ * @since 1.0.7
+ * @author sollyu
+ */
+inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfBlank(key: K, default: V): V {
+    val value = getValueIfNull(key, default)
+    return if (value == null || value.isBlank()) default else value
+}
+
+/**
+ * 获取一个值，如果值的内容满足条件就返回默认值
+ * 1. 如果[key]不存在将直接返回[default]
+ * 2. 如果[value]值为[null]将直接返回[default]
+ *
+ * @since 1.0.7
+ * @author sollyu
+ */
+inline fun <reified K, V> Map<out K, V>.getValueIfPredicate(key: K, @NotNull default: V, predicate: (value: V) -> Boolean): V {
+    if (this.containsKey(key).not())
+        return default
+    val value = this[key] ?: return default
+    if (predicate(value))
+        return default
+    return value
+}
 
 /**
  * 获取一个值并强转成指定类型
