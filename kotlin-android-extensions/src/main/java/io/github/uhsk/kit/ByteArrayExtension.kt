@@ -78,18 +78,8 @@ fun ByteArray.toHexString(toLowerCase: Boolean = false): CharSequence = Hex.enco
  */
 fun ByteArray.gzip(): ByteArrayGzipUtil = ByteArrayGzipUtil(bytes = this)
 
+/**
+ * @since 1.0.8
+ * @author sollyu
+ */
 fun ByteArray.crypto(): ByteArrayCryptoUtil = ByteArrayCryptoUtil(bytes = this)
-
-fun test() {
-
-    val b = byteArrayOf()
-
-    // base64 aes 解密
-    b.base64().decode().crypto().aesCbcPKCS5Padding().decrypt(key = byteArrayOf(), iv = byteArrayOf())
-
-    // aes加密后转base64
-    b.crypto().aesCbcPKCS5Padding().encrypt(key = byteArrayOf(), iv = byteArrayOf()).base64().encode()
-
-
-
-}
