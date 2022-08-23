@@ -17,8 +17,6 @@
 
 package io.github.uhsk.kit
 
-import org.jetbrains.annotations.NotNull
-
 /**
  * 或者一个值：值的内容允许为[null]
  *
@@ -72,12 +70,14 @@ inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfBlank(key: K, 
  * @since 1.0.7
  * @author sollyu
  */
-inline fun <reified K, V> Map<out K, V>.getValueIfPredicate(key: K, @NotNull default: V, predicate: (value: V) -> Boolean): V {
-    if (this.containsKey(key).not())
+inline fun <reified K, V> Map<out K, V>.getValueIfPredicate(key: K, default: V, predicate: (value: V) -> Boolean): V {
+    if (this.containsKey(key).not()) {
         return default
+    }
     val value = this[key] ?: return default
-    if (predicate(value))
+    if (predicate(value)) {
         return default
+    }
     return value
 }
 
