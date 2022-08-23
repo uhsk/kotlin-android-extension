@@ -46,10 +46,6 @@ android {
         freeCompilerArgs = ["-Xbackend-threads=0"]
     }
 
-    packagingOptions {
-        exclude 'META-INF/library_release.kotlin_module'
-    }
-
 }
 
 dependencies {
