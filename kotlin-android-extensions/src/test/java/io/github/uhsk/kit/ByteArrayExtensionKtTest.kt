@@ -52,4 +52,38 @@ class ByteArrayExtensionKtTest {
         val test: ByteArray = "test".toByteArray(charset = Charsets.UTF_8)
         Assert.assertEquals("EE26B0DD4AF7E749AA1A8EE3C10AE9923F618980772E473F8819A5D4940E0DB27AC185F8A0E1D5F84F88BC887FD67B143732C304CC5FA9AD8E6F57F50028A8FF", test.sha512())
     }
+
+    @Test
+    fun aesCbcPKCS5Padding() {
+        val key: ByteArray = "1234567890123456".toByteArray()
+        val iv: ByteArray = "1234567890123456".toByteArray()
+        val test: ByteArray = "hello world".toByteArray(charset = Charsets.UTF_8)
+        Assert.assertEquals("6C0C78D1E15455FFE12316DA57CFC669", test.crypto().aesCbcPKCS5Padding().encrypt(key, iv).toHexString())
+        Assert.assertEquals("hello world", "6C0C78D1E15455FFE12316DA57CFC669".asHexStringToByteArray().crypto().aesCbcPKCS5Padding().decrypt(key, iv).toString(charset = Charsets.UTF_8))
+    }
+
+    @Test
+    fun aesCbcNoPadding() {
+        val key: ByteArray = "1234567890123456".toByteArray()
+        val iv: ByteArray = "1234567890123456".toByteArray()
+        val test: ByteArray = "HelloWorldKotlin".toByteArray(charset = Charsets.UTF_8)
+        Assert.assertEquals("0C64EAD1B08AAAA383D557D7D8D16258", test.crypto().aesCbcNoPadding().encrypt(key, iv).toHexString())
+        Assert.assertEquals("HelloWorldKotlin", "0C64EAD1B08AAAA383D557D7D8D16258".asHexStringToByteArray().crypto().aesCbcNoPadding().decrypt(key, iv).toString(charset = Charsets.UTF_8))
+    }
+
+    @Test
+    fun aesEbcPKCS5Padding() {
+        val key: ByteArray = "1234567890123456".toByteArray()
+        val test: ByteArray = "hello world".toByteArray(charset = Charsets.UTF_8)
+        Assert.assertEquals("AE82F34F7181855430DB65AB50F01DB3", test.crypto().aesEbcPKCS5Padding().encrypt(key).toHexString())
+        Assert.assertEquals("hello world", "AE82F34F7181855430DB65AB50F01DB3".asHexStringToByteArray().crypto().aesEbcPKCS5Padding().decrypt(key).toString(charset = Charsets.UTF_8))
+    }
+
+    @Test
+    fun aesEbcNoPadding() {
+        val key: ByteArray = "1234567890123456".toByteArray()
+        val test: ByteArray = "HelloWorldKotlin".toByteArray(charset = Charsets.UTF_8)
+        Assert.assertEquals("EADBC09B3B1C2F5FF90900386895339A", test.crypto().aesEbcNoPadding().encrypt(key).toHexString())
+        Assert.assertEquals("HelloWorldKotlin", "EADBC09B3B1C2F5FF90900386895339A".asHexStringToByteArray().crypto().aesEbcNoPadding().decrypt(key).toString(charset = Charsets.UTF_8))
+    }
 }
