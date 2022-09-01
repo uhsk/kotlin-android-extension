@@ -7,4 +7,4 @@ import java.util.*
  * @since 1.0.2
  * @author ethan
  */
-fun Long.toDate() = Date(this)
+fun Long.toDate(): Date = Date(this)

@@ -1,8 +1,6 @@
 package io.github.uhsk.kit
 
 import org.junit.Assert
-import org.junit.Assert.*
-
 import org.junit.Test
 
 /**
@@ -14,8 +12,7 @@ class LongExtensionKtTest {
 
     @Test
     fun toDate() {
-        val date = 1660143400589L.toDate()
-        Assert.assertEquals(date.format(), "2022-08-10 22:56:40")
+        Assert.assertEquals(1660143400589L, 1660143400589L.toDate().time)
     }
 
 }
