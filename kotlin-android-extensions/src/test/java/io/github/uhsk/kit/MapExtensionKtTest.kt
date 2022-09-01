@@ -64,11 +64,11 @@ class MapExtensionKtTest {
         hashMap["test3"] = " "
         hashMap["test4"] = "1"
 
-        Assert.assertEquals("hello", hashMap.getValueIfEmpty(key = "test0", default = "hello"))
-        Assert.assertEquals("hello", hashMap.getValueIfEmpty(key = "test1", default = "hello"))
-        Assert.assertEquals("hello", hashMap.getValueIfEmpty(key = "test2", default = "hello"))
-        Assert.assertEquals(" ", hashMap.getValueIfEmpty(key = "test3", default = "hello"))
-        Assert.assertEquals("1", hashMap.getValueIfEmpty(key = "test4", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrEmpty(key = "test0", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrEmpty(key = "test1", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrEmpty(key = "test2", default = "hello"))
+        Assert.assertEquals(" ", hashMap.getValueIfNullOrEmpty(key = "test3", default = "hello"))
+        Assert.assertEquals("1", hashMap.getValueIfNullOrEmpty(key = "test4", default = "hello"))
     }
 
     @Test
@@ -79,11 +79,11 @@ class MapExtensionKtTest {
         hashMap["test3"] = " "
         hashMap["test4"] = "1"
 
-        Assert.assertEquals("hello", hashMap.getValueIfBlank(key = "test0", default = "hello"))
-        Assert.assertEquals("hello", hashMap.getValueIfBlank(key = "test1", default = "hello"))
-        Assert.assertEquals("hello", hashMap.getValueIfBlank(key = "test2", default = "hello"))
-        Assert.assertEquals("hello", hashMap.getValueIfBlank(key = "test3", default = "hello"))
-        Assert.assertEquals("1", hashMap.getValueIfBlank(key = "test4", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrBlank(key = "test0", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrBlank(key = "test1", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrBlank(key = "test2", default = "hello"))
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrBlank(key = "test3", default = "hello"))
+        Assert.assertEquals("1", hashMap.getValueIfNullOrBlank(key = "test4", default = "hello"))
     }
 
     @Test
@@ -93,9 +93,9 @@ class MapExtensionKtTest {
         hashMap["test2"] = ""
         hashMap["test3"] = " "
 
-        Assert.assertEquals("hello", hashMap.getValueIfPredicate(key = "test0", default = "hello") { it?.isEmpty() == true })
-        Assert.assertEquals("hello", hashMap.getValueIfPredicate(key = "test1", default = "hello") { it?.isEmpty() == true })
-        Assert.assertEquals("hello", hashMap.getValueIfPredicate(key = "test2", default = "hello") { it?.isBlank() == true })
-        Assert.assertEquals("hello", hashMap.getValueIfPredicate(key = "test3", default = "hello") { it?.isBlank() == true })
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrPredicate(key = "test0", default = "hello") { it?.isEmpty() == true })
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrPredicate(key = "test1", default = "hello") { it?.isEmpty() == true })
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrPredicate(key = "test2", default = "hello") { it?.isBlank() == true })
+        Assert.assertEquals("hello", hashMap.getValueIfNullOrPredicate(key = "test3", default = "hello") { it?.isBlank() == true })
     }
 }

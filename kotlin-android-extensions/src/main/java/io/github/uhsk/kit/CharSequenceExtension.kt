@@ -97,4 +97,4 @@ fun CharSequence.chomp(): CharSequence = this.toString().chomp()
  * @since 1.0.2
  * @author sollyu
  */
-fun CharSequence.find(regex: Regex, startIndex: Int = 0) = regex.find(this, startIndex)
+fun CharSequence.find(regex: Regex, startIndex: Int = 0): MatchResult? = regex.find(this, startIndex)

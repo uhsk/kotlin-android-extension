@@ -31,7 +31,10 @@ fun SharedPreferences.has(key: String): Boolean = this.all.containsKey(key)
  * @author sollyu
  */
 fun SharedPreferences.getJson(key: String, default: JSONObject? = null): JSONObject? {
-    val string = getString(key, null) ?: return default
+    if (has(key).not()) {
+        return default
+    }
+    val string: String = getString(key, null) ?: return default
     return JSONObject(string)
 }
 

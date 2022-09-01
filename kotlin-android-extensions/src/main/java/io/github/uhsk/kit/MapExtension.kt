@@ -46,7 +46,7 @@ inline fun <reified K, V> Map<out K, V>.getValueIfNull(key: K, default: V): V {
  * @since 1.0.7
  * @author sollyu
  */
-inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfEmpty(key: K, default: V): V {
+inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfNullOrEmpty(key: K, default: V): V {
     val value = getValueIfNull(key, default)
     return if (value == null || value.isEmpty()) default else value
 }
@@ -57,7 +57,7 @@ inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfEmpty(key: K, 
  * @since 1.0.7
  * @author sollyu
  */
-inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfBlank(key: K, default: V): V {
+inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfNullOrBlank(key: K, default: V): V {
     val value = getValueIfNull(key, default)
     return if (value == null || value.isBlank()) default else value
 }
@@ -70,7 +70,7 @@ inline fun <reified K, V : CharSequence?> Map<out K, V>.getValueIfBlank(key: K, 
  * @since 1.0.7
  * @author sollyu
  */
-inline fun <reified K, V> Map<out K, V>.getValueIfPredicate(key: K, default: V, predicate: (value: V) -> Boolean): V {
+inline fun <reified K, V> Map<out K, V>.getValueIfNullOrPredicate(key: K, default: V, predicate: (value: V) -> Boolean): V {
     if (this.containsKey(key).not()) {
         return default
     }
