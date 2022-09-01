@@ -63,7 +63,7 @@ fun CharSequence.base64(charset: Charset = Charsets.UTF_8): ByteArrayBase64Util 
  * @since 1.0.0
  * @author sollyu
  */
-fun CharSequence.asFile(): File = File(this.toString())
+fun CharSequence.toFile(): File = File(this.toString())
 
 /**
  * @since 1.0.0

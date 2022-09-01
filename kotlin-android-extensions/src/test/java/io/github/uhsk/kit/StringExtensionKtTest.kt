@@ -19,7 +19,6 @@ package io.github.uhsk.kit
 
 import org.junit.Assert
 import org.junit.Test
-import java.util.*
 
 internal class StringExtensionKtTest {
 
@@ -58,7 +57,7 @@ internal class StringExtensionKtTest {
 
     @Test
     fun asFile() {
-        Assert.assertEquals(("/sdcard/kotlin.txt" as CharSequence).asFile().path, "/sdcard/kotlin.txt")
+        Assert.assertEquals(("/sdcard/kotlin.txt" as CharSequence).toFile().path, "/sdcard/kotlin.txt")
     }
 
     @Test

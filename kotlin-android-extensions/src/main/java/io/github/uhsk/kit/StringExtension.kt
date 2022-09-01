@@ -114,7 +114,7 @@ fun String.find(regex: Regex, startIndex: Int = 0) = regex.find(this, startIndex
  * @since 1.0.0
  * @author sollyu
  */
-fun String.asFile(): File = File(this)
+fun String.toFile(): File = File(this)
 
 /**
  * @since 1.0.2
