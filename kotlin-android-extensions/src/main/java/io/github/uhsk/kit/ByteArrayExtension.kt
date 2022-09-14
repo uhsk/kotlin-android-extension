@@ -15,8 +15,6 @@
  *
  */
 
-@file:JvmName(name = "ByteArrayExtension")
-
 package io.github.uhsk.kit
 
 import io.github.uhsk.kit.utils.ByteArrayBase64Util
@@ -96,7 +94,7 @@ fun ByteArray.crypto(): ByteArrayCryptoUtil = ByteArrayCryptoUtil(bytes = this)
  */
 fun ByteArray.align(length: Int, byte: Byte = 0x00): ByteArray {
     var temp: ByteArray = byteArrayOf()
-    for (i in size until length){
+    for (i in size until length) {
         temp += byte
     }
     return temp + this
