@@ -104,4 +104,9 @@ class ByteArrayExtensionKtTest {
         Assert.assertEquals(0x000E2F01, byteArrayOf(0x0E, 0x2F, 0x01).toInt())
         Assert.assertEquals(0x7F0E2F01, byteArrayOf(0x7F, 0x0E, 0x2F, 0x01).toInt())
     }
+
+    @Test
+    fun toByteBuffer() {
+        Assert.assertEquals(1, byteArrayOf(0x7F).toByteBuffer().array().size)
+    }
 }

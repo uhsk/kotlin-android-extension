@@ -69,7 +69,7 @@ fun ByteArray.hash(): ByteArrayHashUtil = ByteArrayHashUtil(bytes = this)
  * @since 1.0.0
  * @author sollyu
  */
-fun ByteArray.toHexString(toLowerCase: Boolean = false): CharSequence = Hex.encodeHexString(this, toLowerCase)
+fun ByteArray.toHexString(toLowerCase: Boolean = false): CharSequence = Hex.encodeHex(this, toLowerCase).concatToString()
 
 /**
  * @since 1.0.0
@@ -113,4 +113,12 @@ fun ByteArray.toInt(offset: Int = 0): Int {
         else -> this
     }
     return ByteBuffer.wrap(temp, offset, Int.SIZE_BYTES).int
+}
+
+/**
+ * @since 1.0.9
+ * @author sollyu
+ */
+fun ByteArray.toByteBuffer(offset: Int = 0, length: Int = this.size): ByteBuffer {
+    return ByteBuffer.wrap(this, offset, length)
 }
