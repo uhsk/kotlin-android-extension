@@ -17,11 +17,11 @@
 
 package io.github.uhsk.kit
 
+import io.github.uhsk.kit.libs.codec.binary.Hex
 import io.github.uhsk.kit.utils.ByteArrayBase64Util
 import io.github.uhsk.kit.utils.ByteArrayCryptoUtil
 import io.github.uhsk.kit.utils.ByteArrayGzipUtil
 import io.github.uhsk.kit.utils.ByteArrayHashUtil
-import org.apache.commons.codec.binary.Hex
 import java.nio.ByteBuffer
 
 /**
@@ -69,7 +69,7 @@ fun ByteArray.hash(): ByteArrayHashUtil = ByteArrayHashUtil(bytes = this)
  * @since 1.0.0
  * @author sollyu
  */
-fun ByteArray.toHexString(toLowerCase: Boolean = false): CharSequence = Hex.encodeHex(this, toLowerCase).concatToString()
+fun ByteArray.toHexString(toLowerCase: Boolean = false): CharSequence = Hex.encodeHexString(this, toLowerCase)
 
 /**
  * @since 1.0.0

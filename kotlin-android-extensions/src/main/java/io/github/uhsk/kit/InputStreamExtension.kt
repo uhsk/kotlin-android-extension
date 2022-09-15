@@ -17,7 +17,7 @@
 
 package io.github.uhsk.kit
 
-import org.apache.commons.codec.digest.DigestUtils
+import io.github.uhsk.kit.libs.codec.digest.DigestUtils
 import org.apache.commons.io.IOUtils
 import java.io.InputStream
 import java.nio.charset.Charset

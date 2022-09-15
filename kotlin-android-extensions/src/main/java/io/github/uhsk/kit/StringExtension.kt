@@ -17,10 +17,10 @@
 
 package io.github.uhsk.kit
 
+import io.github.uhsk.kit.libs.codec.binary.Hex
 import io.github.uhsk.kit.utils.ByteArrayBase64Util
 import io.github.uhsk.kit.utils.ByteArrayGzipUtil
 import io.github.uhsk.kit.utils.ByteArrayHashUtil
-import org.apache.commons.codec.binary.Hex
 import org.apache.commons.lang3.LocaleUtils
 import org.apache.commons.lang3.StringUtils
 import java.io.File
