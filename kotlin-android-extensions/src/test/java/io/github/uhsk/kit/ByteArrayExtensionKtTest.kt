@@ -86,4 +86,27 @@ class ByteArrayExtensionKtTest {
         Assert.assertEquals("EADBC09B3B1C2F5FF90900386895339A", test.crypto().aesEbcNoPadding().encrypt(key).toHexString())
         Assert.assertEquals("HelloWorldKotlin", "EADBC09B3B1C2F5FF90900386895339A".asHexStringToByteArray().crypto().aesEbcNoPadding().decrypt(key).toString(charset = Charsets.UTF_8))
     }
+
+    @Test
+    fun align() {
+        Assert.assertArrayEquals(byteArrayOf(0x00), byteArrayOf().align(length = 1, byte = 0x00))
+        Assert.assertArrayEquals(byteArrayOf(0x00, 0x00), byteArrayOf(0x00, 0x00).align(length = 1, byte = 0x00))
+        Assert.assertArrayEquals(byteArrayOf(0x00.toByte(), 0x00.toByte(), 0x00.toByte(), 0x01.toByte()), byteArrayOf(0x01.toByte()).align(length = 4, byte = 0x00))
+        Assert.assertArrayEquals(byteArrayOf(0xA0.toByte(), 0xA0.toByte(), 0xA0.toByte(), 0x01.toByte()), byteArrayOf(0x01.toByte()).align(length = 4, byte = 0xA0.toByte()))
+    }
+
+    @Test
+    fun toInt() {
+        Assert.assertEquals(0x00000000, byteArrayOf().toInt())
+        Assert.assertEquals(0x00000001, byteArrayOf(0x01).toInt())
+        Assert.assertEquals(0x00002F01, byteArrayOf(0x2F, 0x01).toInt())
+        Assert.assertEquals(0x00002F01, byteArrayOf(0x00, 0x2F, 0x01).toInt(offset = 1))
+        Assert.assertEquals(0x000E2F01, byteArrayOf(0x0E, 0x2F, 0x01).toInt())
+        Assert.assertEquals(0x7F0E2F01, byteArrayOf(0x7F, 0x0E, 0x2F, 0x01).toInt())
+    }
+
+    @Test
+    fun toByteBuffer() {
+        Assert.assertEquals(1, byteArrayOf(0x7F).toByteBuffer().array().size)
+    }
 }

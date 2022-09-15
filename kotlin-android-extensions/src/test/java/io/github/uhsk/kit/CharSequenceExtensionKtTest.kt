@@ -57,7 +57,7 @@ internal class CharSequenceExtensionKtTest {
 
     @Test
     fun asFile() {
-        Assert.assertEquals(("/sdcard/kotlin.txt" as CharSequence).asFile().path, "/sdcard/kotlin.txt")
+        Assert.assertEquals(("/sdcard/kotlin.txt" as CharSequence).toFile().path, "/sdcard/kotlin.txt")
     }
 
     @Test

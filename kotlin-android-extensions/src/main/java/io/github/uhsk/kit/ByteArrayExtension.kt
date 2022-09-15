@@ -15,15 +15,14 @@
  *
  */
 
-@file:JvmName(name = "ByteArrayExtension")
-
 package io.github.uhsk.kit
 
+import io.github.uhsk.kit.libs.codec.binary.Hex
 import io.github.uhsk.kit.utils.ByteArrayBase64Util
 import io.github.uhsk.kit.utils.ByteArrayCryptoUtil
 import io.github.uhsk.kit.utils.ByteArrayGzipUtil
 import io.github.uhsk.kit.utils.ByteArrayHashUtil
-import org.apache.commons.codec.binary.Hex
+import java.nio.ByteBuffer
 
 /**
  * @param toLowerCase
@@ -83,3 +82,43 @@ fun ByteArray.gzip(): ByteArrayGzipUtil = ByteArrayGzipUtil(bytes = this)
  * @author sollyu
  */
 fun ByteArray.crypto(): ByteArrayCryptoUtil = ByteArrayCryptoUtil(bytes = this)
+
+/**
+ * 将数组长度对齐。
+ *
+ * ```kotlin
+ *  byteArrayOf(0x01).align(length = 4, byte = 0x00) == byteArrayOf(0x00, 0x00, 0x00, 0x01)
+ * ```
+ * @since 1.0.9
+ * @author sollyu
+ */
+fun ByteArray.align(length: Int, byte: Byte = 0x00): ByteArray {
+    var temp: ByteArray = byteArrayOf()
+    for (i in size until length) {
+        temp += byte
+    }
+    return temp + this
+}
+
+/**
+ * @since 1.0.9
+ * @author sollyu
+ */
+fun ByteArray.toInt(offset: Int = 0): Int {
+    val temp: ByteArray = when (this.size - offset) {
+        0    -> return 0
+        1    -> byteArrayOf(0, 0, 0) + this
+        2    -> byteArrayOf(0, 0) + this
+        3    -> byteArrayOf(0) + this
+        else -> this
+    }
+    return ByteBuffer.wrap(temp, offset, Int.SIZE_BYTES).int
+}
+
+/**
+ * @since 1.0.9
+ * @author sollyu
+ */
+fun ByteArray.toByteBuffer(offset: Int = 0, length: Int = this.size): ByteBuffer {
+    return ByteBuffer.wrap(this, offset, length)
+}

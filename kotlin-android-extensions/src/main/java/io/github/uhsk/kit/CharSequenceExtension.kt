@@ -17,8 +17,8 @@
 
 package io.github.uhsk.kit
 
+import io.github.uhsk.kit.libs.codec.binary.Hex
 import io.github.uhsk.kit.utils.ByteArrayBase64Util
-import org.apache.commons.codec.binary.Hex
 import org.apache.commons.lang3.StringUtils
 import java.io.File
 import java.nio.charset.Charset
@@ -63,7 +63,7 @@ fun CharSequence.base64(charset: Charset = Charsets.UTF_8): ByteArrayBase64Util 
  * @since 1.0.0
  * @author sollyu
  */
-fun CharSequence.asFile(): File = File(this.toString())
+fun CharSequence.toFile(): File = File(this.toString())
 
 /**
  * @since 1.0.0

@@ -17,7 +17,7 @@
 
 package io.github.uhsk.kit.utils
 
-import org.apache.commons.codec.digest.DigestUtils
+import io.github.uhsk.kit.libs.codec.digest.DigestUtils
 import java.util.*
 
 /**
