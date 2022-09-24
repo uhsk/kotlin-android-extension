@@ -15,34 +15,25 @@
  *
  */
 
-package io.github.uhsk.kit
+package io.github.uhsk.kit.android
 
-import android.content.SharedPreferences
-import org.json.JSONObject
-
-/**
- * @since 1.0.3
- * @author sollyu
- */
-fun SharedPreferences.has(key: String): Boolean = this.all.containsKey(key)
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.pm.ActivityInfo
 
 /**
- * @since 1.0.3
+ * @since 1.0.11
  * @author sollyu
  */
-fun SharedPreferences.getJson(key: String, default: JSONObject? = null): JSONObject? {
-    if (has(key).not()) {
-        return default
-    }
-    val string: String = getString(key, null) ?: return default
-    return JSONObject(string)
+fun Activity.setLandscape() {
+    this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 }
 
 /**
- * @since 1.0.3
+ * @since 1.0.11
  * @author sollyu
  */
-fun SharedPreferences.Editor.putJson(key: String, value: JSONObject): SharedPreferences.Editor {
-    this.putString(key, value.toString())
-    return this
+@SuppressLint("SourceLockedOrientationActivity")
+fun Activity.setPortrait() {
+    this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 }
