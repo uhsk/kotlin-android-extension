@@ -17,7 +17,6 @@
 
 package io.github.uhsk.kit.android
 
-import android.Manifest
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -120,6 +119,31 @@ fun Context.startActivityForSystemByShutdown(block: (Intent.() -> Unit)? = null)
         Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN")
     }
     intent.putExtra("android.intent.extra.KEY_CONFIRM", false)
+    intent.__contextStartActivityDefaultFlag(block)
+    this.startActivity(intent)
+}
+
+/**
+ * 跳转到拨号页面
+ *
+ * @since 1.0.11
+ * @author sollyu
+ */
+fun Context.startActivityForSystemByPhoneNumber(value: String, block: (Intent.() -> Unit)? = null) {
+    val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(value)))
+    intent.__contextStartActivityDefaultFlag(block)
+    this.startActivity(intent)
+}
+
+/**
+ * 跳转到发送短信
+ *
+ * @since 1.0.11
+ * @author sollyu
+ */
+fun Context.startActivityForSystemBySms(number: String, content: CharSequence, block: (Intent.() -> Unit)? = null) {
+    val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + Uri.encode(number)))
+    intent.putExtra("sms_body", content)
     intent.__contextStartActivityDefaultFlag(block)
     this.startActivity(intent)
 }
