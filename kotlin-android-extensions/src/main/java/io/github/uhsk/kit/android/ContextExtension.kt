@@ -17,6 +17,7 @@
 
 package io.github.uhsk.kit.android
 
+import android.Manifest
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -99,6 +100,7 @@ fun Context.startActivityForSystemSettingsByAccessibility(block: (Intent.() -> U
  * @since 1.0.11
  * @author sollyu
  */
+@MainThread
 fun Context.startActivityForSystemSettingsByWirelessSettings(block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
     intent.__contextStartActivityDefaultFlag(block)
@@ -111,6 +113,7 @@ fun Context.startActivityForSystemSettingsByWirelessSettings(block: (Intent.() -
  * @since 1.0.11
  * @author sollyu
  */
+@MainThread
 @RequiresPermission(value = "com.android.internal.intent.action.REQUEST_SHUTDOWN")
 fun Context.startActivityForSystemByShutdown(block: (Intent.() -> Unit)? = null) {
     val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -129,6 +132,7 @@ fun Context.startActivityForSystemByShutdown(block: (Intent.() -> Unit)? = null)
  * @since 1.0.11
  * @author sollyu
  */
+@MainThread
 fun Context.startActivityForSystemByPhoneNumber(value: String, block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Uri.encode(value)))
     intent.__contextStartActivityDefaultFlag(block)
@@ -141,6 +145,7 @@ fun Context.startActivityForSystemByPhoneNumber(value: String, block: (Intent.()
  * @since 1.0.11
  * @author sollyu
  */
+@MainThread
 fun Context.startActivityForSystemBySms(number: String, content: CharSequence, block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + Uri.encode(number)))
     intent.putExtra("sms_body", content)
@@ -200,11 +205,11 @@ fun Context.startActivityForShareText(value: String, title: String = "", block: 
     this.startActivity(Intent.createChooser(intent, title))
 }
 
-fun Context.startActivityForImage(block: (Intent.() -> Unit)? = null) {
+fun Context.startActivityForShareImage(block: (Intent.() -> Unit)? = null) {
     TODO("Not yet implemented")
 }
 
-fun Context.startActivityForFile(block: (Intent.() -> Unit)? = null) {
+fun Context.startActivityForShareFile(block: (Intent.() -> Unit)? = null) {
     TODO("Not yet implemented")
 }
 
@@ -217,6 +222,8 @@ fun Context.startActivityForFile(block: (Intent.() -> Unit)? = null) {
  * @author sollyu
  */
 @MainThread
+@RequiresApi(Build.VERSION_CODES.O)
+@RequiresPermission(value = Manifest.permission.REQUEST_DELETE_PACKAGES)
 fun Context.showDialogForUninstallApplication(packageName: String, block: (Intent.() -> Unit)? = null) {
     val intent = Intent(Intent.ACTION_DELETE, Uri.fromParts("package", packageName, null))
     intent.__contextStartActivityDefaultFlag(block)
