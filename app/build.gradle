@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace "io.github.uhsk.android.extension.app"
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
@@ -14,7 +15,7 @@ android {
 
     buildFeatures {
         viewBinding true
-        dataBinding true
+        dataBinding false
     }
 
     buildTypes {
