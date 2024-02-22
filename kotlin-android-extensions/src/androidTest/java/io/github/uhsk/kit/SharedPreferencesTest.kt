@@ -21,6 +21,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import io.github.uhsk.kit.android.getJson
+import io.github.uhsk.kit.android.has
+import io.github.uhsk.kit.android.putJson
 import org.json.JSONObject
 import org.junit.Assert
 import org.junit.Test

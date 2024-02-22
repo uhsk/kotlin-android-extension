@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace "io.github.uhsk.android.extension.app"
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
@@ -10,6 +11,11 @@ android {
         targetSdk libs.versions.compileSdk.get().toInteger()
         versionCode 1
         versionName "1.0.0"
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding false
     }
 
     buildTypes {
@@ -32,4 +38,8 @@ android {
 dependencies {
     implementation libs.androidx.core
     implementation libs.androidx.appcompat
+    implementation project(path: ':kotlin-android-extensions')
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

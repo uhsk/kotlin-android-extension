@@ -19,6 +19,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace "io.github.uhsk.kit.build"
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
