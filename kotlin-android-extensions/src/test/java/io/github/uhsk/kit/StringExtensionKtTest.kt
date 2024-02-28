@@ -80,4 +80,11 @@ internal class StringExtensionKtTest {
     fun toDate() {
         Assert.assertEquals("2022-09-01 11:09:46".toDate()?.time, 1662001786000)
     }
+
+    @Test
+    fun limit() {
+        Assert.assertEquals("kotlin", "kotlin".limit(count = 6))
+        Assert.assertEquals("kotlin", "kotlin is the best".limit(count = 6))
+        Assert.assertEquals("best", "best".limit(count = 6))
+    }
 }
