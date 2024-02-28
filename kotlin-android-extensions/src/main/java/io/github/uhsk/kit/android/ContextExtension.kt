@@ -22,12 +22,14 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.media.AudioManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.Settings
+import android.util.DisplayMetrics
 import android.widget.Toast
 import androidx.annotation.MainThread
 import androidx.annotation.RequiresApi
@@ -44,6 +46,23 @@ private fun Intent.__contextStartActivityDefaultFlag(block: (Intent.() -> Unit)?
     } else {
         this.block()
     }
+}
+
+/**
+ * 设置屏幕密度
+ *
+ * @see [Context#attachBaseContext]
+ * @since 1.0.12
+ * @author sollyu
+ */
+@Suppress(names = ["DEPRECATION"])
+fun Context.updateDensityDpi(density: Int = DisplayMetrics.DENSITY_DEFAULT) {
+    val resources: Resources = this.resources
+    val configuration: Configuration = resources.configuration
+    val displayMetrics: DisplayMetrics = resources.displayMetrics
+    displayMetrics.densityDpi = density
+    configuration.densityDpi = density
+    resources.updateConfiguration(configuration, displayMetrics)
 }
 
 /**
