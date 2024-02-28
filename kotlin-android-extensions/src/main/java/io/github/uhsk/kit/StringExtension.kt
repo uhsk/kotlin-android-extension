@@ -130,3 +130,12 @@ fun String.toLocale(): Locale = LocaleUtils.toLocale(this)
  */
 @Throws(ParseException::class)
 fun String.toDate(pattern: String = "yyyy-MM-dd HH:mm:ss", locale: Locale = Locale.ENGLISH): Date? = SimpleDateFormat(pattern, locale).parse(this)
+
+/**
+ * 截取字符串
+ *
+ * @since 1.0.12
+ * @author sollyu
+ */
+fun String.limit(count: Int): String = if (this.length > count) this.substring(startIndex = 0, endIndex = count) else this
+

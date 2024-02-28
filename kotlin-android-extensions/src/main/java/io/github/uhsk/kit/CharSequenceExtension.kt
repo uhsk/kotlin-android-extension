@@ -98,3 +98,11 @@ fun CharSequence.chomp(): CharSequence = this.toString().chomp()
  * @author sollyu
  */
 fun CharSequence.find(regex: Regex, startIndex: Int = 0): MatchResult? = regex.find(this, startIndex)
+
+/**
+ * 截取字符串
+ *
+ * @since 1.0.12
+ * @author sollyu
+ */
+fun CharSequence.limit(count: Int): CharSequence = if (this.length > count) this.substring(startIndex = 0, endIndex = count) else this
