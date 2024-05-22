@@ -233,6 +233,21 @@ fun Context.startActivityForShareFile(block: (Intent.() -> Unit)? = null) {
 }
 
 /**
+ * 跳转到安装app页面
+ *
+ * @since 1.0.13
+ * @author sollyu
+ */
+@RequiresPermission(value = Manifest.permission.REQUEST_INSTALL_PACKAGES)
+fun Context.startActivityForInstallPackage(uri: Uri, block: (Intent.() -> Unit)? = null) {
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    intent.setDataAndType(uri, "application/vnd.android.package-archive")
+    intent.__contextStartActivityDefaultFlag(block)
+    this.startActivity(intent)
+}
+
+/**
  * 显示卸载app对话框
  *
  * 需要 [android.permission.REQUEST_DELETE_PACKAGES] 权限
