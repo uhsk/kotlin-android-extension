@@ -248,6 +248,18 @@ fun Context.startActivityForInstallPackage(uri: Uri, block: (Intent.() -> Unit)?
 }
 
 /**
+ * 启动系统设置页面-开发者选项
+ *
+ * @since 1.0.14
+ * @author sollyu
+ */
+fun Context.startActivityForSystemSettingsByDeveloper(block: (Intent.() -> Unit)? = null) {
+    val intent: android.content.Intent = android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+    intent.__contextStartActivityDefaultFlag(block)
+    startActivity(intent)
+}
+
+/**
  * 显示卸载app对话框
  *
  * 需要 [android.permission.REQUEST_DELETE_PACKAGES] 权限
@@ -353,6 +365,69 @@ fun Context.isLandscape(): Boolean {
 fun Context.isPortrait(): Boolean {
     return this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 }
+
+/**
+ * 当前是否为夜间模式
+ * @since 1.0.14
+ * @author sollyu
+ */
+fun Context.isUiModeNight(): Boolean {
+    return when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+        Configuration.UI_MODE_NIGHT_YES -> true
+        Configuration.UI_MODE_NIGHT_NO -> false
+        else -> false
+    }
+}
+
+
+/**
+ * 检查通知是否启用
+ *
+ * @since 1.0.14
+ * @author sollyu
+ */
+fun Context.isNotificationsEnabled(): Boolean {
+    return androidx.core.app.NotificationManagerCompat.from(this).areNotificationsEnabled()
+}
+
+/**
+ * 检查是否启用模拟位置
+ *
+ * @since 1.0.14
+ * @author sollyu
+ */
+@Suppress(names = ["DEPRECATION"])
+@RequiresApi(Build.VERSION_CODES.M)
+fun Context.isDeveloperMockLocationEnabled(): Boolean {
+    val appOpsManager: android.app.AppOpsManager = this.getSystemService(Context.APP_OPS_SERVICE) as android.app.AppOpsManager
+    val mode: Int = appOpsManager.checkOpNoThrow(android.app.AppOpsManager.OPSTR_MOCK_LOCATION, android.os.Process.myUid(), this.packageName)
+    return mode == android.app.AppOpsManager.MODE_ALLOWED
+}
+
+/**
+ * 检查是否忽略电池优化
+ *
+ * @since 1.0.14
+ * @author sollyu
+ */
+@RequiresApi(Build.VERSION_CODES.M)
+fun Context.isIgnoringBatteryOptimizations(): Boolean {
+    val powerManager: android.os.PowerManager = this.getSystemService(Context.POWER_SERVICE) as android.os.PowerManager
+    return powerManager.isIgnoringBatteryOptimizations(this.packageName)
+}
+
+/**
+ * 检查服务是否运行
+ *
+ * @since 1.0.14
+ * @author sollyu
+ */
+@Suppress(names = ["DEPRECATION"])
+fun Context.isServiceRunning(serviceClass: Class<*>): Boolean {
+    val activityManager: android.app.ActivityManager = this.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
+    return activityManager.getRunningServices(Int.MAX_VALUE).any { serviceClass.name == it.service.className }
+}
+
 
 /**
  * 获取当前音量大小
