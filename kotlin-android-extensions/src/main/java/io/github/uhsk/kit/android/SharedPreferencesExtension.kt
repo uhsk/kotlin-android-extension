@@ -22,12 +22,19 @@ import androidx.core.content.edit
 import org.json.JSONObject
 
 /**
+ * 检查SharedPreferences中是否存在指定的key
+ * @param key 要检查的键名
+ * @return 如果存在返回true，否则返回false
  * @since 1.0.3
  * @author sollyu
  */
 fun SharedPreferences.has(key: String): Boolean = this.all.containsKey(key)
 
 /**
+ * 获取JSON对象
+ * @param key 键名
+ * @param default 默认值，如果不存在或解析失败则返回此值
+ * @return JSON对象，如果不存在或解析失败则返回默认值
  * @since 1.0.3
  * @author sollyu
  */
@@ -40,6 +47,10 @@ fun SharedPreferences.getJson(key: String, default: JSONObject? = null): JSONObj
 }
 
 /**
+ * 保存JSON对象
+ * @param key 键名
+ * @param value 要保存的JSON对象
+ * @return Editor对象，支持链式调用
  * @since 1.0.3
  * @author sollyu
  */
@@ -49,6 +60,9 @@ fun SharedPreferences.Editor.putJson(key: String, value: JSONObject): SharedPref
 }
 
 /**
+ * 获取字符串值，如果不存在则返回null
+ * @param key 键名
+ * @return 字符串值，如果不存在则返回null
  * @since 1.0.14
  * @author sollyu
  */
@@ -61,6 +75,25 @@ fun SharedPreferences.getStringOrNull(key: String): String? {
 }
 
 /**
+ * 获取字符串值，如果不存在则返回默认值
+ * @param key 键名
+ * @param defaultValue 默认值
+ * @return 字符串值，如果不存在则返回默认值
+ * @since 1.0.14
+ * @author sollyu
+ */
+fun SharedPreferences.getStringOrDefault(key: String, defaultValue: String): String {
+    return if (has(key)) {
+        getString(key, defaultValue) ?: defaultValue
+    } else {
+        defaultValue
+    }
+}
+
+/**
+ * 保存字符串值，如果值为null则删除该键
+ * @param key 键名
+ * @param value 要保存的值，如果为null则删除该键
  * @since 1.0.14
  * @author sollyu
  */
@@ -73,6 +106,9 @@ fun SharedPreferences.putStringOrRemove(key: String, value: String?) {
 }
 
 /**
+ * 获取整数值，如果不存在则返回null
+ * @param key 键名
+ * @return 整数值，如果不存在则返回null
  * @since 1.0.14
  * @author sollyu
  */
@@ -85,6 +121,25 @@ fun SharedPreferences.getIntOrNull(key: String): Int? {
 }
 
 /**
+ * 获取整数值，如果不存在则返回默认值
+ * @param key 键名
+ * @param defaultValue 默认值
+ * @return 整数值，如果不存在则返回默认值
+ * @since 1.0.14
+ * @author sollyu
+ */
+fun SharedPreferences.getIntOrDefault(key: String, defaultValue: Int): Int {
+    return if (has(key)) {
+        getInt(key, defaultValue)
+    } else {
+        defaultValue
+    }
+}
+
+/**
+ * 保存整数值，如果值为null则删除该键
+ * @param key 键名
+ * @param value 要保存的值，如果为null则删除该键
  * @since 1.0.14
  * @author sollyu
  */
@@ -97,6 +152,9 @@ fun SharedPreferences.putIntOrRemove(key: String, value: Int?) {
 }
 
 /**
+ * 获取长整数值，如果不存在则返回null
+ * @param key 键名
+ * @return 长整数值，如果不存在则返回null
  * @since 1.0.14
  * @author sollyu
  */
@@ -109,6 +167,25 @@ fun SharedPreferences.getLongOrNull(key: String): Long? {
 }
 
 /**
+ * 获取长整数值，如果不存在则返回默认值
+ * @param key 键名
+ * @param defaultValue 默认值
+ * @return 长整数值，如果不存在则返回默认值
+ * @since 1.0.14
+ * @author sollyu
+ */
+fun SharedPreferences.getLongOrDefault(key: String, defaultValue: Long): Long {
+    return if (has(key)) {
+        getLong(key, defaultValue)
+    } else {
+        defaultValue
+    }
+}
+
+/**
+ * 保存长整数值，如果值为null则删除该键
+ * @param key 键名
+ * @param value 要保存的值，如果为null则删除该键
  * @since 1.0.14
  * @author sollyu
  */
@@ -121,6 +198,9 @@ fun SharedPreferences.putLongOrRemove(key: String, value: Long?) {
 }
 
 /**
+ * 获取浮点数值，如果不存在则返回null
+ * @param key 键名
+ * @return 浮点数值，如果不存在则返回null
  * @since 1.0.14
  * @author sollyu
  */
@@ -133,6 +213,25 @@ fun SharedPreferences.getFloatOrNull(key: String): Float? {
 }
 
 /**
+ * 获取浮点数值，如果不存在则返回默认值
+ * @param key 键名
+ * @param defaultValue 默认值
+ * @return 浮点数值，如果不存在则返回默认值
+ * @since 1.0.14
+ * @author sollyu
+ */
+fun SharedPreferences.getFloatOrDefault(key: String, defaultValue: Float): Float {
+    return if (has(key)) {
+        getFloat(key, defaultValue)
+    } else {
+        defaultValue
+    }
+}
+
+/**
+ * 保存浮点数值，如果值为null则删除该键
+ * @param key 键名
+ * @param value 要保存的值，如果为null则删除该键
  * @since 1.0.14
  * @author sollyu
  */
@@ -145,6 +244,9 @@ fun SharedPreferences.putFloatOrRemove(key: String, value: Float?) {
 }
 
 /**
+ * 获取布尔值，如果不存在则返回null
+ * @param key 键名
+ * @return 布尔值，如果不存在则返回null
  * @since 1.0.14
  * @author sollyu
  */
@@ -157,6 +259,25 @@ fun SharedPreferences.getBooleanOrNull(key: String): Boolean? {
 }
 
 /**
+ * 获取布尔值，如果不存在则返回默认值
+ * @param key 键名
+ * @param defaultValue 默认值
+ * @return 布尔值，如果不存在则返回默认值
+ * @since 1.0.14
+ * @author sollyu
+ */
+fun SharedPreferences.getBooleanOrDefault(key: String, defaultValue: Boolean): Boolean {
+    return if (has(key)) {
+        getBoolean(key, defaultValue)
+    } else {
+        defaultValue
+    }
+}
+
+/**
+ * 保存布尔值，如果值为null则删除该键
+ * @param key 键名
+ * @param value 要保存的值，如果为null则删除该键
  * @since 1.0.14
  * @author sollyu
  */
