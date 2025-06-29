@@ -91,3 +91,18 @@ inline fun <reified K, V> Map<out K, V>.getValueIfNullOrPredicate(key: K, defaul
 inline fun <reified K, V> Map<out K, *>.getValueAs(key: K): V {
     return this[key] as V
 }
+
+/**
+ * 设置一个值，如果值为null则将值移除
+ *
+ * @since 1.0.14
+ */
+inline fun <reified K, reified V> MutableMap<K, V>.setValueOrNullRemove(key: K, value: V?): Unit {
+    if (value == null) {
+        this.remove(key)
+    } else {
+        this[key] = value
+    }
+    return
+}
+
